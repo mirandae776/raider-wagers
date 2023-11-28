@@ -1,26 +1,38 @@
 import React from "react";
 import SignInForm from "./Login";
 import {Link} from "react-router-dom";
+import bootstrap from "bootstrap/dist/css/bootstrap.css";
 
 const HomePage = () => {
     return (
         <div>
-            <nav>
-                <ul>
-                    <li>
-                        <Link to="/exchange">exchange</Link>
+
+            <nav className="navbar navbar-dark bg-dark">
+                <ul className="navbar-nav mr-auto">
+                    <li className="nav-item">
+                        <a className="nav-link" href="\stats">Statistics</a>
                     </li>
-                    <li>
-                        <Link to="/stats">Stats Page</Link>
+                </ul>
+                
+                <ul className="navbar-nav mr-auto">
+                    <li className="nav-item">
+                        <a className="nav-link" href="/exchange">Exchanges</a>
                     </li>
-                    <li>
-                        <Link to="/events">Events</Link>
+                </ul>
+
+                <ul className="navbar-nav mr-auto">
+                    <li className="nav-item">
+                        <a className="nav-link" href="/events">Events</a>
                     </li>
-                    <li>
-                        <Link to="/wager">Wagers</Link>
+                </ul>
+
+                <ul className="navbar-nav mr-auto">
+                    <li className="navbar-nav mr-auto">
+                        <a className="nav-link" href="/wager">Wagers</a>
                     </li>
                 </ul>
             </nav>
+
         </div>
     );
 };
