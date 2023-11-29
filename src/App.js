@@ -7,7 +7,6 @@ import StatPage from "./StatsPage/StatPage";
 import WagerPage from "./WagerPage/WagerPage";
 import EventPage from "./EventPage/EventPage";
 
-
 function App() {
   return (
       <Router>

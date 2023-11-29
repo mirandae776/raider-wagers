@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-// import { MongoClient } from 'mongodb';
+import { useLocation } from "react-router-dom";
+import allGames from '../InitialGames.json';
 
 const WagerPage = () => {
     const [bets, setBets] = useState([]);
     const { search } = useLocation();
     const queryParams = new URLSearchParams(search);
-    const gameID = queryParams.get("gameID");
+    const gameID = parseInt(queryParams.get("gameID"));
 
     useEffect(() => {
         const fetchData = async () => {
-            // const client = new MongoClient('mongodb://localhost:27017/test');
-            // await client.connect();
-            // const db = client.db('RaiderWagers');
-            // const collection = db.collection('games');
-            // const result = await collection.find({ gameID }).toArray();
-            // setBets(result[0].bets)
+            if (gameID){
+                const selectedGame = allGames.filter(game => game.gameID === gameID);
+                setBets(selectedGame[0].bets);
+            }
         };
 
         fetchData();
