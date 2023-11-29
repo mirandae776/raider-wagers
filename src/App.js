@@ -1,8 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
 import Login from "./HomePage/Login";
 import HomePage from "./HomePage/HomePage";
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {HashRouter as Router, Route, Routes} from 'react-router-dom';
 import ExchangePage from "./ExchangePage/ExchangePage";
 import StatPage from "./StatsPage/StatPage";
 import WagerPage from "./WagerPage/WagerPage";

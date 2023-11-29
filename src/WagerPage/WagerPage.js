@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { MongoClient } from 'mongodb';
+// import { MongoClient } from 'mongodb';
 
 const WagerPage = () => {
     const [bets, setBets] = useState([]);
@@ -10,12 +10,12 @@ const WagerPage = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const client = new MongoClient('mongodb://localhost:27017/test');
-            await client.connect();
-            const db = client.db('RaiderWagers');
-            const collection = db.collection('games');
-            const result = await collection.find({ gameID }).toArray();
-            setBets(result[0].bets)
+            // const client = new MongoClient('mongodb://localhost:27017/test');
+            // await client.connect();
+            // const db = client.db('RaiderWagers');
+            // const collection = db.collection('games');
+            // const result = await collection.find({ gameID }).toArray();
+            // setBets(result[0].bets)
         };
 
         fetchData();

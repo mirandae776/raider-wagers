@@ -1,7 +1,7 @@
 import React from "react";
 import SignInForm from "./Login";
 import {Link} from "react-router-dom";
-import bootstrap from "bootstrap/dist/css/bootstrap.css";
+// import bootstrap from "bootstrap/dist/css/bootstrap.css";
 
 const HomePage = () => {
     return (
