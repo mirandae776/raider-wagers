@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import allGames from '../InitialGames.json';
+import { v4 as uuidv4 } from 'uuid';
 
 const WagerPage = () => {
     const [bets, setBets] = useState([]);
@@ -28,10 +29,20 @@ const WagerPage = () => {
     };
 
     const handleConfirmBet = () => {
-        // You can perform additional logic here, e.g., send the bet to the server
-        console.log(`Placing bet for ${selectedBet.propName} ${selectedBet.prop} - Amount: ${betAmount}`);
+        const placedBet = selectedBet;
+        placedBet.uid = uuidv4();
+        placedBet.amount = betAmount;
 
-        // Reset state
+        const existingBets = localStorage.getItem('bets');
+        let existingBetsArray
+        if (existingBets){
+            existingBetsArray = JSON.parse(existingBets);
+        } else {
+            existingBetsArray = [];
+        }
+        existingBetsArray.push(placedBet);
+        localStorage.setItem('bets', JSON.stringify(existingBetsArray));
+
         setSelectedBet(null);
         setIsOverlayVisible(false);
         setBetAmount(0);
