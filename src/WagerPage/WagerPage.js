@@ -29,23 +29,29 @@ const WagerPage = () => {
     };
 
     const handleConfirmBet = () => {
-        const placedBet = selectedBet;
-        placedBet.uid = uuidv4();
-        placedBet.amount = betAmount;
+        const currentDabloons = parseInt(localStorage.getItem('dabloons'));
+        if (currentDabloons >= betAmount){
+            localStorage.setItem('dabloons', `${currentDabloons-betAmount}`);
+            const placedBet = selectedBet;
+            placedBet.uid = uuidv4();
+            placedBet.amount = betAmount;
 
-        const existingBets = localStorage.getItem('bets');
-        let existingBetsArray
-        if (existingBets){
-            existingBetsArray = JSON.parse(existingBets);
-        } else {
-            existingBetsArray = [];
+            const existingBets = localStorage.getItem('bets');
+            let existingBetsArray
+            if (existingBets){
+                existingBetsArray = JSON.parse(existingBets);
+            } else {
+                existingBetsArray = [];
+            }
+            existingBetsArray.push(placedBet);
+            localStorage.setItem('bets', JSON.stringify(existingBetsArray));
+
+            setSelectedBet(null);
+            setIsOverlayVisible(false);
+            setBetAmount(0);
+        } else{
+            console.log('not enough dabloons for bet');
         }
-        existingBetsArray.push(placedBet);
-        localStorage.setItem('bets', JSON.stringify(existingBetsArray));
-
-        setSelectedBet(null);
-        setIsOverlayVisible(false);
-        setBetAmount(0);
     };
 
     return (
