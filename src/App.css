@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.phone-container {
+  width: 400px;
+  height: 100vh;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: white;
+}

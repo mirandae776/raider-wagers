@@ -9,16 +9,18 @@ import EventPage from "./EventPage/EventPage";
 
 function App() {
   return (
-      <Router>
-        <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/home" element={<HomePage />}/>
-            <Route path="/exchange" element={<ExchangePage />} />
-            <Route path="/stats" element={<StatPage />} />
-            <Route path="/wager" element={<WagerPage />} />
-            <Route path="/events" element={<EventPage />} />
-        </Routes>
-      </Router>
+      <div className={'phone-container'}>
+          <Router>
+              <Routes>
+                  <Route path="/" element={<Login />} />
+                  <Route path="/home" element={<HomePage />}/>
+                  <Route path="/exchange" element={<ExchangePage />} />
+                  <Route path="/stats" element={<StatPage />} />
+                  <Route path="/wager" element={<WagerPage />} />
+                  <Route path="/events" element={<EventPage />} />
+              </Routes>
+          </Router>
+      </div>
   );
 }
 
