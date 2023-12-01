@@ -19,6 +19,9 @@ const HomePage = () => {
                     <li className="nav-item">
                         <a className="nav-link" href="/raider-wagers/#/events">Place A Bet</a>
                     </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="/raider-wagers/#/BetHistory">View Bet history</a>
+                    </li>
                 </ul>
         </div>
     );
