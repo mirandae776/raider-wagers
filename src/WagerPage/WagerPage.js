@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import allGames from '../InitialGames.json';
 import { v4 as uuidv4 } from 'uuid';
 
-const WagerPage = () => {
+const WagerPage = ({currDoubloons, setCurrDoubloons}) => {
     const [bets, setBets] = useState([]);
     const [selectedBet, setSelectedBet] = useState(null);
     const [isOverlayVisible, setIsOverlayVisible] = useState(false);
@@ -14,16 +14,9 @@ const WagerPage = () => {
     }
     const [isButtonDisabled, setIsButtonDisabled] = useState(disableButton);
 
-
-
-
-
     const { search } = useLocation();
     const queryParams = new URLSearchParams(search);
     const gameID = parseInt(queryParams.get("gameID"));
-
-
-
 
     useEffect(() => {
         const fetchData = async () => {
@@ -43,11 +36,13 @@ const WagerPage = () => {
 
     const handleConfirmBet = () => {
         const currentDabloons = parseInt(localStorage.getItem('dabloons'));
+        setCurrDoubloons(currentDabloons);
         if (currentDabloons >= betAmount){
             localStorage.setItem('dabloons', `${currentDabloons-betAmount}`);
             const placedBet = selectedBet;
             placedBet.uid = uuidv4();
             placedBet.amount = betAmount;
+            setCurrDoubloons(currentDabloons-betAmount);
 
             const existingBets = localStorage.getItem('bets');
             let existingBetsArray

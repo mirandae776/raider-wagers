@@ -6,17 +6,29 @@ import ExchangePage from "./ExchangePage/ExchangePage";
 import BetPage from "./BetHistory/BetPage";
 import WagerPage from "./WagerPage/WagerPage";
 import EventPage from "./EventPage/EventPage";
+import NavBar from "./NavBar/NavBar";
+import React, { useEffect, useState } from "react";
+
 
 function App() {
-  return (
-      <div className={'phone-container'}>
+    const [currDoubloons, setCurrDoubloons] = useState(parseInt(localStorage.getItem('dabloons'))); 
+
+
+return (
+    <div className={'phone-container'}>
+        <NavBar
+            currDoubloons={currDoubloons}
+        />
           <Router>
               <Routes>
                   <Route path="/" element={<Login />} />
                   <Route path="/home" element={<HomePage />}/>
                   <Route path="/exchange" element={<ExchangePage />} />
                   <Route path="/betHistory" element={<BetPage />} />
-                  <Route path="/wager" element={<WagerPage />} />
+                  <Route path="/wager" element={<WagerPage
+                        currDoubloons={currDoubloons}
+                        setCurrDoubloons={setCurrDoubloons}
+                  />} />
                   <Route path="/events" element={<EventPage />} />
               </Routes>
           </Router>

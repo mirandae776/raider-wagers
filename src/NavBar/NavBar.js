@@ -1,27 +1,29 @@
-import React from "react";
 import {Link} from "react-router-dom";
+import home from './home.png';
+import coin from './coin.png';
+import React, { useEffect, useState } from "react";
 
 
-const NavBar = () => {
+
+const NavBar = ({currDoubloons}) => {
+
     return (
-        <div>
-            <p>Navigation</p>
-            <nav>
-                <ul>
-                    <li>
-                        <Link to="/exchange">exchange</Link>
-                    </li>
-                    <li>
-                        <Link to="/stats">Stats Page</Link>
-                    </li>
-                    <li>
-                        <Link to="/events">Events</Link>
-                    </li>
-                    <li>
-                        <Link to="/wager">Wagers</Link>
-                    </li>
-                </ul>
-            </nav>
+        <div class='App-header'>
+            <a href="/raider-wagers/#/home">
+                <img
+                    src={home}  // Replace with the actual URL of your image
+                    alt="Home Page Icon"
+                    class='icon'
+                />
+            </a>
+            <div class='doubloons'>
+                <img
+                    src={coin}  // Replace with the actual URL of your image
+                    alt="Doubloon Icon"
+                    class='icon'
+                />
+                <p>{currDoubloons}</p>
+            </div>
         </div>
     );
 };
