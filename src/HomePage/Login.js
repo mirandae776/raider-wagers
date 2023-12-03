@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from './logo.png';
 const Login = () => {
 
     const navigate = useNavigate();
@@ -15,7 +16,7 @@ const Login = () => {
     return (
         <div style={styles.container}>
             <img
-                src="logo.png"  // Replace with the actual URL of your image
+                src={logo}  // Replace with the actual URL of your image
                 alt="Raider Wagers Logo"
                 style={styles.logo}
             />
