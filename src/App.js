@@ -24,7 +24,9 @@ return (
                   <Route path="/" element={<Login />} />
                   <Route path="/home" element={<HomePage />}/>
                   <Route path="/exchange" element={<ExchangePage />} />
-                  <Route path="/betHistory" element={<BetPage />} />
+                  <Route path="/betHistory" element={<BetPage 
+                        setCurrDoubloons={setCurrDoubloons}
+                    />} />
                   <Route path="/wager" element={<WagerPage
                         currDoubloons={currDoubloons}
                         setCurrDoubloons={setCurrDoubloons}

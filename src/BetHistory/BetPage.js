@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown } from 'react-bootstrap';
 import {parse} from "uuid";
 
-const BetTable = () => {
+const BetTable = ({setCurrDoubloons}) => {
     const [bets, setBets] = useState([]);
     const [selectedOption, setSelectedOption] = useState('recentlyPlaced');
 
@@ -22,6 +22,7 @@ const BetTable = () => {
         const currentDabloons = parseInt(localStorage.getItem('dabloons'));
         const refundAmount = parseInt(betAmount)
         localStorage.setItem('dabloons', `${currentDabloons+refundAmount}`);
+        setCurrDoubloons(currentDabloons+refundAmount);
 
         // Update the state and local storage with the modified data
         setBets(updatedBets);
