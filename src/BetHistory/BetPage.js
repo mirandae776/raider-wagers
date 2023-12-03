@@ -80,12 +80,6 @@ const BetTable = ({setCurrDoubloons}) => {
 
     return (
         <div className="ml-auto">
-            <Button>
-                <a className="nav-link" href="/raider-wagers/home#/home">
-                    Home
-                </a>
-            </Button>
-
             <h2>Bet History</h2>
 
             <div>
