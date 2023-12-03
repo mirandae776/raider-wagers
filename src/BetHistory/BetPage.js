@@ -3,6 +3,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown } from 'react-bootstrap';
+import {parse} from "uuid";
 
 const BetTable = () => {
     const [bets, setBets] = useState([]);
@@ -15,9 +16,12 @@ const BetTable = () => {
         }
     }, []);
 
-    const handleDelete = (uid, gameDate) => {
+    const handleDelete = (uid, gameDate,betAmount) => {
         // Filter out the bet with the specified UUID
         const updatedBets = bets.filter((bet) => bet.uid !== uid);
+        const currentDabloons = parseInt(localStorage.getItem('dabloons'));
+        const refundAmount = parseInt(betAmount)
+        localStorage.setItem('dabloons', `${currentDabloons+refundAmount}`);
 
         // Update the state and local storage with the modified data
         setBets(updatedBets);
@@ -61,7 +65,7 @@ const BetTable = () => {
                                 variant="danger"
                                 size="sm"
                                 disabled={new Date() > new Date(bet.date)}
-                                onClick={() => handleDelete(bet.uid, bet.date)}
+                                onClick={() => handleDelete(bet.uid, bet.date,bet.amount)}
                             >
                                 Cancel
                             </Button>
