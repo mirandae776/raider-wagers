@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import allGames from '../InitialGames.json';
 import { v4 as uuidv4 } from 'uuid';
+import Table from "react-bootstrap/Table";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const WagerPage = ({currDoubloons, setCurrDoubloons}) => {
+const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
     const [bets, setBets] = useState([]);
     const [selectedBet, setSelectedBet] = useState(null);
     const [isOverlayVisible, setIsOverlayVisible] = useState(false);
@@ -26,7 +28,6 @@ const WagerPage = ({currDoubloons, setCurrDoubloons}) => {
             }
         };
         fetchData();
-
     }, [gameID]);
 
     const handleBetClick = (bet) => {
@@ -37,16 +38,16 @@ const WagerPage = ({currDoubloons, setCurrDoubloons}) => {
     const handleConfirmBet = () => {
         const currentDabloons = parseInt(localStorage.getItem('dabloons'));
         setCurrDoubloons(currentDabloons);
-        if (currentDabloons >= betAmount){
-            localStorage.setItem('dabloons', `${currentDabloons-betAmount}`);
+        if (currentDabloons >= betAmount) {
+            localStorage.setItem('dabloons', `${currentDabloons - betAmount}`);
             const placedBet = selectedBet;
             placedBet.uid = uuidv4();
             placedBet.amount = betAmount;
-            setCurrDoubloons(currentDabloons-betAmount);
+            setCurrDoubloons(currentDabloons - betAmount);
 
             const existingBets = localStorage.getItem('bets');
             let existingBetsArray
-            if (existingBets){
+            if (existingBets) {
                 existingBetsArray = JSON.parse(existingBets);
             } else {
                 existingBetsArray = [];
@@ -58,7 +59,7 @@ const WagerPage = ({currDoubloons, setCurrDoubloons}) => {
             setIsOverlayVisible(false);
             setBetAmount(0);
             setIsButtonDisabled(false);
-        } else{
+        } else {
             console.log('not enough dabloons for bet');
         }
     };
@@ -66,8 +67,6 @@ const WagerPage = ({currDoubloons, setCurrDoubloons}) => {
     const handleReuseLastBetAmount = () => {
         const existingBets = JSON.parse(localStorage.getItem('bets'));
         if (existingBets != null) {
-
-
             const lastBet = existingBets[existingBets.length - 1].amount
             const inputButton = document.getElementById("inputButton")
             inputButton.value = lastBet
@@ -80,30 +79,32 @@ const WagerPage = ({currDoubloons, setCurrDoubloons}) => {
     return (
         <div>
             <p>Available Bets</p>
-            {bets.map((bet) => (
-                <div
-                    key={`${bet.propName}-${bet.prop}-${bet.odds}`}
-                    onClick={() => handleBetClick(bet)}
-                    style={{
-                        cursor: "pointer",
-                        transition: "background 0.3s",
-                        position: "relative",
-                        margin: "5px",
-                        padding: "10px",
-                        borderRadius: "8px",
-                        background: "#fff",
-                    }}
-                    onMouseEnter={(e) => {
-                        e.currentTarget.style.background = "rgba(0, 0, 0, 0.1)";
-                    }}
-                    onMouseLeave={(e) => {
-                        e.currentTarget.style.background = "#fff";
-                    }}
-                >
-                    <h1>{`${bet.propName} ${bet.prop}`}</h1>
-                    <h2>{`${bet.odds}`}</h2>
-                </div>
-            ))}
+            <Table striped bordered hover>
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Property Name</th>
+                    <th>Property</th>
+                    <th>Odds</th>
+                    <th>Place Bet</th>
+                </tr>
+                </thead>
+                <tbody>
+                {bets.map((bet) => (
+                    <tr key={`${bet.propName}-${bet.prop}-${bet.odds}`}>
+                        <td>{bet.date}</td>
+                        <td>{bet.propName}</td>
+                        <td>{bet.prop}</td>
+                        <td>{bet.odds}</td>
+                        <td>
+                            <button onClick={() => handleBetClick(bet)}>
+                                Place Bet
+                            </button>
+                        </td>
+                    </tr>
+                ))}
+                </tbody>
+            </Table>
             {isOverlayVisible && (
                 <div>
                     {/* Darkened background overlay */}
@@ -114,8 +115,8 @@ const WagerPage = ({currDoubloons, setCurrDoubloons}) => {
                             left: 0,
                             width: "100%",
                             height: "100%",
-                            background: "rgba(0, 0, 0, 0.5)", // Adjust the transparency as needed
-                            zIndex: 998, // Set a lower z-index than the overlay
+                            background: "rgba(0, 0, 0, 0.5)",
+                            zIndex: 998,
                         }}
                     ></div>
 
@@ -137,7 +138,7 @@ const WagerPage = ({currDoubloons, setCurrDoubloons}) => {
                             <h3>Enter Amount to Bet</h3>
                             <input
                                 type="number"
-                                id = "inputButton"
+                                id="inputButton"
                                 value={betAmount}
                                 onChange={(e) => setBetAmount(e.target.value)}
                             />
