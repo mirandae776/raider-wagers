@@ -1,3 +1,6 @@
+# Raider Wagers
+Raider Wagers is a an innovative sports betting application that uses virtual currency specific for MSOE athletics that enhances the campus experience. This will promote sporting events attendance and friendly, engaging competition between students.  
+
 ## Running the Application
 
 Using Raider Wagers is easy. There is nothing to install or commands to run. Instead, all you have to do is follow this link: https://mirandae776.github.io/raider-wagers/
