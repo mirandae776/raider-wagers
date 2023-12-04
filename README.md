@@ -1,6 +1,6 @@
 ## Running the Application
 
-Using raider wagers is easy, all you have to do is follow this link: https://mirandae776.github.io/raider-wagers/
+Using raider wagers is easy. There is nothing to install. Instead, all you have to do is follow this link: https://mirandae776.github.io/raider-wagers/
 
 ## What can I do?
 The Raider Wagers application is still a work in progress, but even still, there are several features that you as a user can make use of.
