@@ -45,6 +45,7 @@
 
 .phone-container {
   width: 500px;
+  max-height: 100vh;
   height: 100vh;
   text-align: center;
   padding: 20px;

@@ -29,7 +29,7 @@ const EventsPage = () => {
             </thead>
             <tbody>
             {games.map((sportingEvent) => (
-                <tr>
+                <tr key={`${sportingEvent.oponent}-${sportingEvent.date}`}>
                     <td>{sportingEvent.date}</td>
                     <td>{`Raiders vs ${sportingEvent.opponent}`}</td>
                     <td>{sportingEvent.location}</td>

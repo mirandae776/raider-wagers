@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import SignInForm from "./Login";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 // import bootstrap from "bootstrap/dist/css/bootstrap.css";
 const initialDabloons = 5000;
 
@@ -13,6 +13,8 @@ const HomePage = () => {
             console.log(`dabloons: ${dabloons}`);
         }
     }, []);
+
+
     return (
         <div>
                 <ul className="navbar-nav mr-auto">

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import allGames from '../InitialGames.json';
 import { v4 as uuidv4 } from 'uuid';
 import Table from "react-bootstrap/Table";
@@ -14,11 +14,12 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
     if (JSON.parse(localStorage.getItem('bets')) != null) {
         disableButton = false
     }
-    const [isButtonDisabled, setIsButtonDisabled] = useState(disableButton);
 
+    const navigate = useNavigate();
     const { search } = useLocation();
     const queryParams = new URLSearchParams(search);
     const gameID = parseInt(queryParams.get("gameID"));
+    const overlayQueryParam = queryParams.get("showOverlay");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,16 +31,24 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
         fetchData();
     }, [gameID]);
 
+    useEffect(() => {
+        setIsOverlayVisible(overlayQueryParam === "true");
+    }, [overlayQueryParam]);
+
     const handleBetClick = (bet) => {
         setSelectedBet(bet);
         setIsOverlayVisible(true);
+
+        const newSearchParams = new URLSearchParams(search);
+        newSearchParams.set("showOverlay", "true");
+        navigate(`?${newSearchParams.toString()}`);
     };
 
     const handleConfirmBet = () => {
         const currentDabloons = parseInt(localStorage.getItem('dabloons'));
         setCurrDoubloons(currentDabloons);
-        if (currentDabloons >= betAmount) {
-            localStorage.setItem('dabloons', `${currentDabloons - betAmount}`);
+        if (currentDabloons >= betAmount && betAmount > 0){
+            localStorage.setItem('dabloons', `${currentDabloons-betAmount}`);
             const placedBet = selectedBet;
             placedBet.uid = uuidv4();
             placedBet.amount = betAmount;
@@ -58,20 +67,18 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
             setSelectedBet(null);
             setIsOverlayVisible(false);
             setBetAmount(0);
-            setIsButtonDisabled(false);
-        } else {
+        } else{
             console.log('not enough dabloons for bet');
         }
     };
 
     const handleReuseLastBetAmount = () => {
         const existingBets = JSON.parse(localStorage.getItem('bets'));
-        if (existingBets != null) {
+        if (existingBets && existingBets.length > 0) {
             const lastBet = existingBets[existingBets.length - 1].amount
             const inputButton = document.getElementById("inputButton")
             inputButton.value = lastBet
         } else {
-            setIsButtonDisabled(true);
             console.log("Something happened to the bets in local storage")
         }
     }
@@ -135,7 +142,11 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
                         }}
                     >
                         <div className="overlay-content">
-                            <h3>Enter Amount to Bet</h3>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <h3 style={{ marginRight: '10px' }}>Enter Amount to Bet</h3>
+                                <button onClick={() => setIsOverlayVisible(false)}>X</button>
+                            </div>
+
                             <input
                                 type="number"
                                 id="inputButton"
@@ -143,7 +154,17 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
                                 onChange={(e) => setBetAmount(e.target.value)}
                             />
                             <button onClick={handleConfirmBet}>Confirm Bet</button>
-                            <button onClick={handleReuseLastBetAmount} disabled={isButtonDisabled}>Reuse last bet amount</button>
+                            <button
+                                onClick={handleReuseLastBetAmount}
+                                disabled={
+                                    (() => {
+                                        const existingBets = JSON.parse(localStorage.getItem('bets'));
+                                        return !(existingBets !== null && existingBets.length > 0);
+                                    })()
+                                }
+                            >
+                                Reuse last bet amount
+                            </button>
                         </div>
                     </div>
                 </div>
