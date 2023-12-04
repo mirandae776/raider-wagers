@@ -9,11 +9,8 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
     const [bets, setBets] = useState([]);
     const [selectedBet, setSelectedBet] = useState(null);
     const [isOverlayVisible, setIsOverlayVisible] = useState(false);
+    const [isConfirmationOverlayVisible, setIsConfirmationOverlayVisible] = useState(false);
     const [betAmount, setBetAmount] = useState(0);
-    let disableButton = true
-    if (JSON.parse(localStorage.getItem('bets')) != null) {
-        disableButton = false
-    }
 
     const navigate = useNavigate();
     const { search } = useLocation();
@@ -67,6 +64,7 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
             setSelectedBet(null);
             setIsOverlayVisible(false);
             setBetAmount(0);
+            setIsConfirmationOverlayVisible(true)
         } else{
             console.log('not enough dabloons for bet');
         }
@@ -83,6 +81,9 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
         }
     }
 
+    const  handleUndoLastBet = () => {
+
+    };
     return (
         <div>
             <p>Available Bets</p>
@@ -169,6 +170,30 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
                     </div>
                 </div>
             )}
+            {isConfirmationOverlayVisible && (
+
+                <div className={"overlay-content"}
+                     style={{
+                         position: "fixed",
+                         top: "65%",
+                         left: "50%",
+                         transform: "translate(-50%, -50%)",
+                         background: "#fff",
+                         color: "#000",
+                         padding: "20px",
+                         borderRadius: "8px",
+                         zIndex: 999,
+                     }}
+
+                >
+                    <button onClick={() => setIsConfirmationOverlayVisible(false)}>X</button>
+                    <p>Bet has been placed</p>
+                    <button onClick={() => handleUndoLastBet}>Undo bet</button>
+                </div>
+            )
+
+
+            }
         </div>
     );
 };
