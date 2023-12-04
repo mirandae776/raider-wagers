@@ -76,6 +76,7 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
             const lastBet = existingBets[existingBets.length - 1].amount
             const inputButton = document.getElementById("inputButton")
             inputButton.value = lastBet
+            setBetAmount(lastBet)
         } else {
             console.log("Something happened to the bets in local storage")
         }
