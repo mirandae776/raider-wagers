@@ -2,6 +2,16 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from './logo.png';
 
+const accounts = {
+    "accounts": [
+        {"email": "chapovalova@msoe.edu", "password": "password"},
+        {"email": "czerkisi@msoe.edu", "password": "password"},
+        {"email": "neiberlen@msoe.edu", "password": "password"},
+        {"email": "mirandae@msoe.edu", "password": "password"},
+        {"email": "kirktonm@msoe.edu", "password": "password"}
+    ]
+}
+
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -21,7 +31,14 @@ const Login = () => {
             return;
         }
 
-        // Perform your sign-in logic here
+        // Check if the email and password match an account in the database
+        const account = accounts.accounts.find((account) => account.email === username && account.password === password);
+        if (!account) {
+            setError('Invalid email or password');
+            return;
+        }
+
+        
 
         // After successful sign-in, navigate to the home page
         navigate('/home');
