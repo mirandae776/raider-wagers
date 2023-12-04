@@ -146,7 +146,12 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
                         <div className="overlay-content">
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <h3 style={{ marginRight: '10px' }}>Enter Amount to Bet</h3>
-                                <button onClick={() => setIsOverlayVisible(false)}>X</button>
+                                <button onClick={() => {
+                                    setIsOverlayVisible(false);
+                                    const newSearchParams = new URLSearchParams(search);
+                                    newSearchParams.set("showOverlay", "false");
+                                    console.log('hiding overlay');
+                                }}>X</button>
                             </div>
 
                             <input
