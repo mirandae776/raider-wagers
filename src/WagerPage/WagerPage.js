@@ -4,6 +4,7 @@ import allGames from '../InitialGames.json';
 import { v4 as uuidv4 } from 'uuid';
 import Table from "react-bootstrap/Table";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from "react-bootstrap/Button";
 
 const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
     const [bets, setBets] = useState([]);
@@ -11,6 +12,10 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
     const [isOverlayVisible, setIsOverlayVisible] = useState(false);
     const [isConfirmationOverlayVisible, setIsConfirmationOverlayVisible] = useState(false);
     const [betAmount, setBetAmount] = useState(0);
+    let disableButton = true
+    if (JSON.parse(localStorage.getItem('bets')) != null) {
+        disableButton = false
+    }
 
     const navigate = useNavigate();
     const { search } = useLocation();
@@ -76,7 +81,7 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
             const lastBet = existingBets[existingBets.length - 1].amount
             const inputButton = document.getElementById("inputButton")
             inputButton.value = lastBet
-            setBetAmount(lastBet)
+            setBetAmount(lastBet);
         } else {
             console.log("Something happened to the bets in local storage")
         }
@@ -106,9 +111,9 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
                         <td>{bet.prop}</td>
                         <td>{bet.odds}</td>
                         <td>
-                            <button onClick={() => handleBetClick(bet)}>
+                            <Button onClick={() => handleBetClick(bet)}>
                                 Place Bet
-                            </button>
+                            </Button>
                         </td>
                     </tr>
                 ))}
@@ -155,9 +160,10 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
                                 value={betAmount}
                                 onChange={(e) => setBetAmount(e.target.value)}
                             />
-                            <button onClick={handleConfirmBet}>Confirm Bet</button>
-                            <button
+                            <Button variant={"primary"} onClick={handleConfirmBet}>Confirm Bet</Button>
+                            <Button
                                 onClick={handleReuseLastBetAmount}
+                                variant={"primary"}
                                 disabled={
                                     (() => {
                                         const existingBets = JSON.parse(localStorage.getItem('bets'));
@@ -166,7 +172,7 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
                                 }
                             >
                                 Reuse last bet amount
-                            </button>
+                            </Button>
                         </div>
                     </div>
                 </div>

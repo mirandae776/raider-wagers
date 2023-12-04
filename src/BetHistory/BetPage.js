@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown } from 'react-bootstrap';
-import {parse} from "uuid";
 
-const BetTable = ({setCurrDoubloons}) => {
+const BetTable = ({ setCurrDoubloons }) => {
     const [bets, setBets] = useState([]);
     const [selectedOption, setSelectedOption] = useState('recentlyPlaced');
+    const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+    const [selectedBetToDelete, setSelectedBetToDelete] = useState(null);
 
     useEffect(() => {
         const storedBets = localStorage.getItem('bets');
@@ -16,17 +18,35 @@ const BetTable = ({setCurrDoubloons}) => {
         }
     }, []);
 
-    const handleDelete = (uid, gameDate,betAmount) => {
+    const handleDelete = (uid, gameDate, betAmount) => {
+        // Show the confirmation modal and set the selected bet for deletion
+        setSelectedBetToDelete({ uid, gameDate, betAmount });
+        setShowConfirmationModal(true);
+    };
+
+    const handleConfirmDelete = () => {
+        const { uid, betAmount } = selectedBetToDelete;
+
         // Filter out the bet with the specified UUID
         const updatedBets = bets.filter((bet) => bet.uid !== uid);
         const currentDabloons = parseInt(localStorage.getItem('dabloons'));
-        const refundAmount = parseInt(betAmount)
-        localStorage.setItem('dabloons', `${currentDabloons+refundAmount}`);
-        setCurrDoubloons(currentDabloons+refundAmount);
+        const refundAmount = parseInt(betAmount);
+        localStorage.setItem('dabloons', `${currentDabloons + refundAmount}`);
+        setCurrDoubloons(currentDabloons + refundAmount);
 
         // Update the state and local storage with the modified data
         setBets(updatedBets);
         localStorage.setItem('bets', JSON.stringify(updatedBets));
+
+        // Close the confirmation modal
+        setShowConfirmationModal(false);
+        setSelectedBetToDelete(null);
+    };
+
+    const handleCancelDelete = () => {
+        // Close the confirmation modal without deleting the bet
+        setShowConfirmationModal(false);
+        setSelectedBetToDelete(null);
     };
 
     const handleDropdownChange = (selected) => {
@@ -66,7 +86,7 @@ const BetTable = ({setCurrDoubloons}) => {
                                 variant="danger"
                                 size="sm"
                                 disabled={new Date() > new Date(bet.date)}
-                                onClick={() => handleDelete(bet.uid, bet.date,bet.amount)}
+                                onClick={() => handleDelete(bet.uid, bet.date, bet.amount)}
                             >
                                 Cancel
                             </Button>
@@ -98,6 +118,24 @@ const BetTable = ({setCurrDoubloons}) => {
             </div>
 
             {bets.length > 0 ? renderTable() : <p>When you start to place bets, you can find the history here</p>}
+
+            {/* Confirmation Modal */}
+            <Modal show={showConfirmationModal} onHide={handleCancelDelete}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Bet Cancellation</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Are you sure you want to cancel this bet? This action cannot be undone.
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCancelDelete}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleConfirmDelete}>
+                        Confirm
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 };
