@@ -1,6 +1,4 @@
 import React, {useEffect} from "react";
-import SignInForm from "./Login";
-import {Link, useNavigate} from "react-router-dom";
 // import bootstrap from "bootstrap/dist/css/bootstrap.css";
 const initialDabloons = 5000;
 
@@ -16,13 +14,14 @@ const HomePage = () => {
 
 
     return (
-        <div>
+        <div style={{ textAlign: 'center' }}>
+            <span>Welcome to Raider Wagers. Place a Bet to get started. Once you've placed a bet, you can View Bet History.</span>
                 <ul className="navbar-nav mr-auto">
-                    <li className="nav-item">
-                        <a className="nav-link" href="/raider-wagers/#/events">Place A Bet</a>
+                    <li className="">
+                        <a className="nav-item" href="/raider-wagers/#/events">Place A Bet</a>
                     </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="/raider-wagers/#/BetHistory">View Bet history</a>
+                    <li className="">
+                        <a className="nav-item" href="/raider-wagers/#/BetHistory">View Bet History</a>
                     </li>
                 </ul>
         </div>

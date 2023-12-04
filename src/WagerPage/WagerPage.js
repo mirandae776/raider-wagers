@@ -37,9 +37,8 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
         setSelectedBet(bet);
         setIsOverlayVisible(true);
 
-        const newSearchParams = new URLSearchParams(search);
-        newSearchParams.set("showOverlay", "true");
-        navigate(`?${newSearchParams.toString()}`);
+        queryParams.set("showOverlay", "true");
+        navigate(`?gameID=${gameID}&showOverlay=true`);
     };
 
     const handleConfirmBet = () => {
@@ -153,7 +152,11 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
                         <div className="overlay-content">
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <h3 style={{ marginRight: '10px' }}>Enter Amount to Bet</h3>
-                                <button onClick={() => setIsOverlayVisible(false)}>X</button>
+                                <button onClick={() => {
+                                    setIsOverlayVisible(false);
+                                    queryParams.set("showOverlay", "false");
+                                    navigate(`?gameID=${gameID}&showOverlay=false`);
+                                }}>X</button>
                             </div>
 
                             <input
