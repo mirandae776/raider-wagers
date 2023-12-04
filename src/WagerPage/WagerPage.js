@@ -4,6 +4,7 @@ import allGames from '../InitialGames.json';
 import { v4 as uuidv4 } from 'uuid';
 import Table from "react-bootstrap/Table";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from "react-bootstrap/Button";
 
 const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
     const [bets, setBets] = useState([]);
@@ -104,9 +105,9 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
                         <td>{bet.prop}</td>
                         <td>{bet.odds}</td>
                         <td>
-                            <button onClick={() => handleBetClick(bet)}>
+                            <Button onClick={() => handleBetClick(bet)}>
                                 Place Bet
-                            </button>
+                            </Button>
                         </td>
                     </tr>
                 ))}
@@ -153,9 +154,10 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
                                 value={betAmount}
                                 onChange={(e) => setBetAmount(e.target.value)}
                             />
-                            <button onClick={handleConfirmBet}>Confirm Bet</button>
-                            <button
+                            <Button variant={"primary"} onClick={handleConfirmBet}>Confirm Bet</Button>
+                            <Button
                                 onClick={handleReuseLastBetAmount}
+                                variant={"primary"}
                                 disabled={
                                     (() => {
                                         const existingBets = JSON.parse(localStorage.getItem('bets'));
@@ -164,7 +166,7 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
                                 }
                             >
                                 Reuse last bet amount
-                            </button>
+                            </Button>
                         </div>
                     </div>
                 </div>
