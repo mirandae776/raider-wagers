@@ -11,10 +11,6 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
     const [selectedBet, setSelectedBet] = useState(null);
     const [isOverlayVisible, setIsOverlayVisible] = useState(false);
     const [betAmount, setBetAmount] = useState(0);
-    let disableButton = true
-    if (JSON.parse(localStorage.getItem('bets')) != null) {
-        disableButton = false
-    }
 
     const navigate = useNavigate();
     const { search } = useLocation();
