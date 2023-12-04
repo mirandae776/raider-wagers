@@ -84,12 +84,13 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
 
     const  handleUndoLastBet = () => {
         const existingBets = JSON.parse(localStorage.getItem('bets'));
-        const totalDabloons = JSON.parse(localStorage.getItem('dabloons'));
-        let lastBet = existingBets.pop()
-        let refundedAmount = lastBet.amount
-        localStorage.setItem('bets',JSON.stringify(existingBets))
-        localStorage.setItem('dabloons',refundedAmount + totalDabloons)
-        setIsConfirmationOverlayVisible(false)
+        const totalDabloons = parseInt(localStorage.getItem('dabloons'));
+        let lastBet = existingBets.pop();
+        let refundedAmount = parseInt(lastBet.amount);
+        localStorage.setItem('bets',JSON.stringify(existingBets));
+        localStorage.setItem('dabloons',refundedAmount + totalDabloons);
+        setCurrDoubloons(refundedAmount + totalDabloons);
+        setIsConfirmationOverlayVisible(false);
     };
     return (
         <div>
