@@ -1,7 +1,6 @@
-import {Link} from "react-router-dom";
 import home from './home.png';
 import coin from './coin.png';
-import React, { useEffect, useState } from "react";
+import React, {} from "react";
 
 
 
@@ -16,6 +15,7 @@ const Header = ({currDoubloons}) => {
                     className='icon'
                 />
             </a>
+            <span className={'header-text'}>Raider Wagers</span>
             <div className='doubloons'>
                 <img
                     src={coin}
