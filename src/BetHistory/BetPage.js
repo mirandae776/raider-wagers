@@ -7,7 +7,7 @@ import { Dropdown } from 'react-bootstrap';
 
 const BetTable = ({ setCurrDoubloons }) => {
     const [bets, setBets] = useState([]);
-    const [selectedOption, setSelectedOption] = useState('recentlyPlaced');
+    const [selectedOption, setSelectedOption] = useState('Recently Placed');
     const [showConfirmationModal, setShowConfirmationModal] = useState(false);
     const [selectedBetsToDelete, setSelectedBetsToDelete] = useState([]);
     const [showMultipleDeleteConfirmation, setShowMultipleDeleteConfirmation] = useState(false);
@@ -113,55 +113,55 @@ const BetTable = ({ setCurrDoubloons }) => {
     const renderTable = () => {
         let sortedBets = [...bets];
 
-        if (selectedOption === 'gameDate') {
+        if (selectedOption === 'Game Date') {
             sortedBets = sortedBets.sort((a, b) => new Date(a.date) - new Date(b.date));
         }
 
         return (
 
-            <Table striped bordered hover>
-
-                <thead>
-                <tr>
-                    <th>Game Date</th>
-                    <th>Amount</th>
-                    <th>Odds</th>
-                    <th>Prop</th>
-                    <th>Prop Name</th>
-                    <th>Cancel</th>
-                    <th>Select</th>
-                </tr>
-                </thead>
-                <tbody>
-                {sortedBets.map((bet, index) => (
-                    <tr key={index}>
-                        <td>{bet.date}</td>
-                        <td>{bet.amount}</td>
-                        <td>{bet.odds}</td>
-                        <td>{bet.prop}</td>
-                        <td>{bet.propName}</td>
-                        <td>
-                            <Button
-                                variant="danger"
-                                size="sm"
-                                disabled={new Date() > new Date(bet.date)}
-                                onClick={() => handleCancelIndividual(bet.uid)}
-                            >
-                                Cancel
-                            </Button>
-                        </td>
-                        <td>
-                            <input
-                                type="checkbox"
-                                onChange={() => handleDelete(bet.uid, bet.date, bet.amount)}
-                                disabled={new Date() > new Date(bet.date)}
-                            />
-                        </td>
-
+            <div style={{ overflowX: 'auto', maxHeight: '500px', maxWidth: '800px' /* Set the desired max height */ }}>
+                <Table striped bordered hover>
+                    <thead>
+                    <tr>
+                        <th>Game Date</th>
+                        <th>Amount</th>
+                        <th>Odds</th>
+                        <th>Prop</th>
+                        <th>Prop Name</th>
+                        <th>Cancel</th>
+                        <th>Select</th>
                     </tr>
-                ))}
-                </tbody>
-            </Table>
+                    </thead>
+                    <tbody>
+                    {sortedBets.reverse().map((bet, index) => (
+                        <tr key={index}>
+                            <td>{bet.date}</td>
+                            <td>{bet.amount}</td>
+                            <td>{bet.odds}</td>
+                            <td>{bet.prop}</td>
+                            <td>{bet.propName}</td>
+                            <td>
+                                <Button
+                                    variant="danger"
+                                    size="sm"
+                                    disabled={new Date() > new Date(bet.date)}
+                                    onClick={() => handleCancelIndividual(bet.uid)}
+                                >
+                                    Cancel
+                                </Button>
+                            </td>
+                            <td>
+                                <input
+                                    type="checkbox"
+                                    onChange={() => handleDelete(bet.uid, bet.date, bet.amount)}
+                                    disabled={new Date() > new Date(bet.date)}
+                                />
+                            </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </Table>
+            </div>
         );
     };
 
@@ -176,20 +176,24 @@ const BetTable = ({ setCurrDoubloons }) => {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                        <Dropdown.Item eventKey="recentlyPlaced">Recently Placed</Dropdown.Item>
-                        <Dropdown.Item eventKey="gameDate">Game Date</Dropdown.Item>
+                        <Dropdown.Item eventKey="Recently Placed">Recently Placed</Dropdown.Item>
+                        <Dropdown.Item eventKey="Game Date">Game Date</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
 
 
-                <span style={{ marginLeft: '10px' }}>Selected Option: {selectedOption}</span>
-                <Button
-                    variant="danger"
-                    onClick={handleDeleteMultiple}
-                    disabled={selectedBetsToDelete.length === 0}
-                >
-                    Delete Multiple
-                </Button>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    <span style={{ marginLeft: '10px' }}>Selected Option: {selectedOption}</span>
+                    <Button
+                        variant="danger"
+                        onClick={handleDeleteMultiple}
+                        disabled={selectedBetsToDelete.length === 0}
+                        style={{ marginLeft: '10px' }}
+                    >
+                        Cancel Multiple
+                    </Button>
+                </div>
+
             </div>
 
             {bets.length > 0 ? renderTable() : <p>When you start to place bets, you can find the history here</p>}

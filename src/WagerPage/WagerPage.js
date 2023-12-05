@@ -221,7 +221,7 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
                 >
                     <button onClick={() => setIsConfirmationOverlayVisible(false)} class="btn btn-primary">Continue</button>
                     <p class="fs-3" >Bet has been placed</p>
-                    <button onClick={handleUndoLastBet} class="btn btn-primary">Undo bet</button>
+                    <button onClick={handleUndoLastBet} class="btn btn-danger">Undo bet</button>
                 </div>
                 </div>
             )
