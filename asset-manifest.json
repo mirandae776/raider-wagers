@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/raider-wagers/static/css/main.9eff8fd2.css",
-    "main.js": "/raider-wagers/static/js/main.50b1fd4c.js",
+    "main.js": "/raider-wagers/static/js/main.c630d24f.js",
     "static/js/787.fc7092cd.chunk.js": "/raider-wagers/static/js/787.fc7092cd.chunk.js",
     "static/media/coin.png": "/raider-wagers/static/media/coin.e2e03ce64fb099806a2e.png",
     "static/media/home.png": "/raider-wagers/static/media/home.de97554d8e91ebf95a93.png",
     "static/media/logo.png": "/raider-wagers/static/media/logo.83c550f66669d9103b65.png",
     "index.html": "/raider-wagers/index.html",
     "main.9eff8fd2.css.map": "/raider-wagers/static/css/main.9eff8fd2.css.map",
-    "main.50b1fd4c.js.map": "/raider-wagers/static/js/main.50b1fd4c.js.map",
+    "main.c630d24f.js.map": "/raider-wagers/static/js/main.c630d24f.js.map",
     "787.fc7092cd.chunk.js.map": "/raider-wagers/static/js/787.fc7092cd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9eff8fd2.css",
-    "static/js/main.50b1fd4c.js"
+    "static/js/main.c630d24f.js"
   ]
 }
