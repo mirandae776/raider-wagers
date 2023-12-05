@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import allGames from '../InitialGames.json';
+import allGames from '../AthleticEvents.json';
 import { v4 as uuidv4 } from 'uuid';
 import Table from "react-bootstrap/Table";
 import 'bootstrap/dist/css/bootstrap.min.css';
