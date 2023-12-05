@@ -2,15 +2,16 @@ import React, {useEffect} from "react";
 // import bootstrap from "bootstrap/dist/css/bootstrap.css";
 const initialDabloons = 5000;
 
-const HomePage = () => {
+const HomePage = ({ setCurrDoubloons }) => {
     useEffect(() => {
         const dabloons = localStorage.getItem('dabloons');
-        if (!dabloons){
+        if (!dabloons) {
             localStorage.setItem('dabloons', `${initialDabloons}`);
+            setCurrDoubloons(initialDabloons);
         } else {
             console.log(`dabloons: ${dabloons}`);
         }
-    }, []);
+    }, [setCurrDoubloons]);
 
 
     return (

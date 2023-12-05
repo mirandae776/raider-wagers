@@ -7,20 +7,23 @@ import BetPage from "./BetHistory/BetPage";
 import WagerPage from "./WagerPage/WagerPage";
 import EventPage from "./EventPage/EventPage";
 import Header from "./Header/Header";
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 
 function App() {
     const [currDoubloons, setCurrDoubloons] = useState(parseInt(localStorage.getItem('dabloons')));
+    if(isNaN(currDoubloons)){
+        setCurrDoubloons(0);
+    }
 
     return (
     <div className={'phone-container'}>
         <Header
-            currDoubloons={currDoubloons}
+            currDoubloons={currDoubloons ?? 0}
         />
           <Router>
               <Routes>
                   <Route path="/" element={<Login />} />
-                  <Route path="/home" element={<HomePage />}/>
+                  <Route path="/home"  element={<HomePage setCurrDoubloons={setCurrDoubloons} />}/>
                   <Route path="/exchange" element={<ExchangePage />} />
                   <Route path="/betHistory" element={<BetPage 
                         setCurrDoubloons={setCurrDoubloons}

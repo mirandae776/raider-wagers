@@ -8,7 +8,6 @@ import { Dropdown } from 'react-bootstrap';
 const BetTable = ({ setCurrDoubloons }) => {
     const [bets, setBets] = useState([]);
     const [selectedOption, setSelectedOption] = useState('Recently Placed');
-    const [showConfirmationModal, setShowConfirmationModal] = useState(false);
     const [selectedBetsToDelete, setSelectedBetsToDelete] = useState([]);
     const [showMultipleDeleteConfirmation, setShowMultipleDeleteConfirmation] = useState(false);
     const [showIndividualDeleteConfirmation, setShowIndividualDeleteConfirmation] = useState(false);
@@ -106,9 +105,6 @@ const BetTable = ({ setCurrDoubloons }) => {
         setSelectedBetsToDelete([]);
     };
 
-    const handleCancelDelete = () => {
-        setSelectedBetsToDelete([]);
-    };
 
     const renderTable = () => {
         let sortedBets = [...bets];

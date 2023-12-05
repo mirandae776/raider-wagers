@@ -66,7 +66,7 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
             setBetAmount(0);
             setIsConfirmationOverlayVisible(true)
         } else{
-            console.log('not enough dabloons for bet');
+            window.alert('Not enough dabloons for bet');
         }
     };
 
@@ -217,8 +217,8 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
                      }}
 
                 >
-                    <button onClick={() => setIsConfirmationOverlayVisible(false)} class="btn btn-primary">Continue</button>
-                    <p class="fs-3" >Bet has been placed</p>
+                    <button onClick={() => setIsConfirmationOverlayVisible(false)} className="btn btn-primary">Continue</button>
+                    <p className="fs-3" >Bet has been placed</p>
                     <button onClick={handleUndoLastBet} class="btn btn-danger">Undo bet</button>
                 </div>
                 </div>
