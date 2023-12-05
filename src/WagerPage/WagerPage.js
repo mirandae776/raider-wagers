@@ -98,9 +98,8 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
             <Table striped bordered hover>
                 <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Property Name</th>
-                    <th>Property</th>
+                    <th>Prop Name</th>
+                    <th>Prop</th>
                     <th>Odds</th>
                     <th>Place Bet</th>
                 </tr>
@@ -108,7 +107,6 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
                 <tbody>
                 {bets.map((bet) => (
                     <tr key={`${bet.propName}-${bet.prop}-${bet.odds}`}>
-                        <td>{bet.date}</td>
                         <td>{bet.propName}</td>
                         <td>{bet.prop}</td>
                         <td>{bet.odds}</td>

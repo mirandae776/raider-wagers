@@ -190,7 +190,7 @@ const BetTable = ({ setCurrDoubloons }) => {
                         disabled={selectedBetsToDelete.length === 0}
                         style={{ marginLeft: '10px' }}
                     >
-                        Cancel Multiple
+                        Cancel Selected Bets
                     </Button>
                 </div>
 
