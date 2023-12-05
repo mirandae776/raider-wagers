@@ -9,7 +9,7 @@ Using Raider Wagers is easy. There is nothing to install or commands to run. Ins
 Many major features have been implemented in the application. The first feature is viewing and placing bets. The application fetches games and props from a server, and gives you the ability to place bets on them. Once you place a bet, you can view and cancel them up to the time the game starts. 
 
 ### User Login
-Immediately upon loading up the application, you're presented with a login screen. Through the use of a user account, your personal betting history and dabloon balance are safe and sound. The username is "user@msoe.edu" where and the password is "password".
+Immediately upon loading up the application, you're presented with a login screen. Through the use of a user account, your personal betting history and dabloon balance are safe and sound. The default username is "user@msoe.edu" and the password is "password".
 
 ### Placing a Wager
 Navigating to the 'Place a Bet' screen by clicking on _Place a Bet_. Next, you will be prompted with several events that you can bet your hard-earned dabloons on. Selecting an event fetches the various props that could occur during the game, along with their odds. You can then select one of these props to place your dabloons on, and once you confirm your bet, it's placed!
