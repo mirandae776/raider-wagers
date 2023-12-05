@@ -6,7 +6,7 @@ const accounts = {
     "accounts": [
         {"email": "chapovalova@msoe.edu", "password": "password"},
         {"email": "czerkisi@msoe.edu", "password": "password"},
-        {"email": "neiberlen@msoe.edu", "password": "password"},
+        {"email": "nieberlen@msoe.edu", "password": "password"},
         {"email": "mirandae@msoe.edu", "password": "password"},
         {"email": "kirktonm@msoe.edu", "password": "password"},
         {"email": "user@msoe.edu", "password": "password"}

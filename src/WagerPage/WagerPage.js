@@ -84,12 +84,13 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
 
     const  handleUndoLastBet = () => {
         const existingBets = JSON.parse(localStorage.getItem('bets'));
-        const totalDabloons = JSON.parse(localStorage.getItem('dabloons'));
-        let lastBet = existingBets.pop()
-        let refundedAmount = lastBet.amount
-        localStorage.setItem('bets',JSON.stringify(existingBets))
-        localStorage.setItem('dabloons',refundedAmount + totalDabloons)
-        setIsConfirmationOverlayVisible(false)
+        const totalDabloons = parseInt(localStorage.getItem('dabloons'));
+        let lastBet = existingBets.pop();
+        let refundedAmount = parseInt(lastBet.amount);
+        localStorage.setItem('bets',JSON.stringify(existingBets));
+        localStorage.setItem('dabloons',refundedAmount + totalDabloons);
+        setCurrDoubloons(refundedAmount + totalDabloons);
+        setIsConfirmationOverlayVisible(false);
     };
     return (
         <div>
@@ -182,14 +183,35 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
                     </div>
                 </div>
             )}
+
+
+
             {isConfirmationOverlayVisible && (
+
+                <div>
+                    <div
+                        style={{
+                            position: "fixed",
+                            top: 0,
+                            left: 0,
+                            width: "100%",
+                            height: "100%",
+                            background: "rgba(0, 0, 0, 0.5)",
+                            zIndex: 998,
+                        }}
+                    ></div>
+
+                    {/* Popup overlay */}
+
+
+
                 <div className={"overlay-content"}
                      style={{
                          position: "fixed",
                          top: "65%",
                          left: "50%",
                          transform: "translate(-50%, -50%)",
-                         background: "#5a5959",
+                         background: "#ffffff",
                          color: "#000",
                          padding: "20px",
                          borderRadius: "8px",
@@ -197,14 +219,16 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
                      }}
 
                 >
-                    <button onClick={() => setIsConfirmationOverlayVisible(false)}>X</button>
-                    <p>Bet has been placed</p>
-                    <button onClick={handleUndoLastBet}>Undo bet</button>
+                    <button onClick={() => setIsConfirmationOverlayVisible(false)} class="btn btn-primary">Continue</button>
+                    <p class="fs-3" >Bet has been placed</p>
+                    <button onClick={handleUndoLastBet} class="btn btn-primary">Undo bet</button>
+                </div>
                 </div>
             )
 
             }
         </div>
+
     );
 };
 
