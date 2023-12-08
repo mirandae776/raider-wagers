@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import initialGames from '../AthleticEvents.json';
 import Table from "react-bootstrap/Table";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from "react-bootstrap/Button";
@@ -7,15 +6,19 @@ import Button from "react-bootstrap/Button";
 const EventsPage = () => {
     const [games, setGames] = useState([]);
 
-
-    const handleNavigateToGame = (gameID) => {
-        // eslint-disable-next-line no-restricted-globals
-        history.push(`/wager?gameID=${gameID}`);
-    };
-
     useEffect(() => {
-        setGames(initialGames);
+        const fetchAllGames = async () => {
+            try {
+                const response = await fetch(process.env.PUBLIC_URL + '/db/AthleticEvents.rwdb');
+                const data = await response.json();
+                setGames(data);
+            } catch (error) {
+                console.error('Error fetching JSON data:', error);
+            }
+        };
+        fetchAllGames();
     }, []);
+
     return (
         <Table striped bordered hover>
             <thead>

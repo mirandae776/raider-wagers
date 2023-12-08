@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import allGames from '../AthleticEvents.json';
 import { v4 as uuidv4 } from 'uuid';
 import Table from "react-bootstrap/Table";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -13,20 +12,37 @@ const WagerPage = ({ currDoubloons, setCurrDoubloons }) => {
     const [isConfirmationOverlayVisible, setIsConfirmationOverlayVisible] = useState(false);
     const [betAmount, setBetAmount] = useState(0);
 
+    function getGameID(){
+        return parseInt(queryParams.get("gameID"));
+    }
+
+    function getShowOverlay(){
+        return queryParams.get("showOverlay");
+    }
+
+
     const navigate = useNavigate();
     const { search } = useLocation();
     const queryParams = new URLSearchParams(search);
-    const gameID = parseInt(queryParams.get("gameID"));
-    const overlayQueryParam = queryParams.get("showOverlay");
+    const gameID = getGameID();
+    const overlayQueryParam = getShowOverlay();
 
     useEffect(() => {
-        const fetchData = async () => {
-            if (gameID) {
-                const selectedGame = allGames.filter(game => game.gameID === gameID);
-                setBets(selectedGame[0].bets);
+        const updateBetsFromGameID = async () => {
+            try {
+                const response = await fetch(process.env.PUBLIC_URL + '/db/AthleticEvents.rwdb');
+                const games = await response.json();
+                if (gameID) {
+                    const selectedGame = games.filter(game => game.gameID === gameID);
+                    if (selectedGame && selectedGame.length > 0){
+                        setBets(selectedGame[0].bets);
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching JSON data:', error);
             }
         };
-        fetchData();
+        updateBetsFromGameID();
     }, [gameID]);
 
     useEffect(() => {

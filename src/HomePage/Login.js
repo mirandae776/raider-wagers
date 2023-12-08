@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from './logo.png';
-import accounts from '../UserAccounts.json';
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -9,7 +8,7 @@ const Login = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleSignIn = () => {
+    const handleSignIn = async () => {
         // Check if both fields are filled
         if (!username || !password) {
             setError('Both fields must be filled');
@@ -21,6 +20,9 @@ const Login = () => {
             setError('Invalid username. Please use an email ending with @msoe.edu');
             return;
         }
+
+        const response = await fetch(process.env.PUBLIC_URL + '/db/UserAccounts.rwdb');
+        const accounts = await response.json();
 
         const account = accounts.find((account) => account.email === username);
 
