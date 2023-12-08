@@ -1,0 +1,80 @@
+[
+  {
+    "gameID": 1,
+    "date": "2023-12-18",
+    "location": "Home",
+    "opponent": "Marquette Soccer",
+    "bets": [
+      {
+        "propName": "First Goal Scorer",
+        "prop": "Johnny Smith",
+        "odds": "+100",
+        "date": "2023-12-18"
+      },
+      {
+        "propName": "Match Winner",
+        "prop": "MSOE",
+        "odds": "-250",
+        "date": "2023-12-18"
+      },
+      {
+        "propName": "Total Goals Over/Under",
+        "prop": "Over 2.5",
+        "odds": "+300",
+        "date": "2023-12-18"
+      }
+    ]
+  },
+  {
+    "gameID": 2,
+    "date": "2023-12-20",
+    "location": "Away",
+    "opponent": "UWM Basketball",
+    "bets": [
+      {
+        "propName": "Game Winner",
+        "prop": "MSOE",
+        "odds": "-175",
+        "date": "2023-12-20"
+      },
+      {
+        "propName": "Hannah Brown Rebounds",
+        "prop": "Over 3.5",
+        "odds": "+200",
+        "date": "2023-12-20"
+      },
+      {
+        "propName": "Bella Walker Points",
+        "prop": "Over 15.5",
+        "odds": "-200",
+        "date": "2023-12-20"
+      }
+    ]
+  },
+  {
+    "gameID": 3,
+    "date": "2023-12-19",
+    "location": "Home",
+    "opponent": "UW Whitewater Baseball",
+    "bets": [
+      {
+        "propName": "MSOE Total Runs Scored",
+        "prop": "Over 4.5",
+        "odds": "-275",
+        "date": "2023-12-19"
+      },
+      {
+        "propName": "Jake Trent Strikeouts",
+        "prop": "Under 3.5",
+        "odds": "-110",
+        "date": "2023-12-19"
+      },
+      {
+        "propName": "Nate Jones Home Run",
+        "prop": "Over 0.5",
+        "odds": "+500",
+        "date": "2023-12-19"
+      }
+    ]
+  }
+]
